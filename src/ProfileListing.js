@@ -29,22 +29,23 @@ class ProfileListing extends Component {
     }
 
     componentDidMount() {
-        this.profileData().then(response => {
-            this.setState({ profilelist: response.data });
-        })
+      
     }
 
     handleChange = (event) => {
-        this.setState({ gender: event.target.value });
-    }
-    profileData = () => {
-        return new Promise((resolve, reject) => {
-            const { gender } = this.state;
-            axios.get(`http://10.117.189.197:9090/Matrimony/api/profiles/${this.state.gender}`).then(function (response) {
+        console.log(event.target.value);
+        //this.setState({ gender: event.target.value });
+        this.profileData(event.target.value).then(response => {
+            this.setState({ profilelist: response.data });
+        })
 
+    }
+    profileData = (gender) => {
+        console.log(gender)
+        return new Promise((resolve, reject) => {
+            axios.get(`http://10.117.189.197:9090/Matrimony/api/profiles/${gender}`).then(function (response) {
             // axios.get(`http://localhost:3000/matrimonial${this.state.gender}`).then(function (response) {
                 resolve(response);
-                console.log(response);
             }).catch(function (error) {
                 reject(error);
             })
@@ -56,8 +57,8 @@ class ProfileListing extends Component {
             <div>
                 <div className="col-md-12 pb-5 pt-5 text-info">
                     Search The profile:
-                <input type="radio" name="gender" value="bride" onChange={this.handleChange} /> Male
-                <input type="radio" name="gender" value="groom" onChange={this.handleChange} /> Female
+                <input type="radio" name="gender" value="male" onChange={this.handleChange} /> Male
+                <input type="radio" name="gender" value="female" onChange={this.handleChange} /> Female
             </div>
 
 

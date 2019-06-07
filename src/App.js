@@ -16,7 +16,7 @@ function App() {
         <Header />
         <br />
         <div>
-          <Link to="/profileList">list</Link>
+          {/* <Link to="/profileList">list</Link> */}
         </div>
         <Switch>
           <Route path="/" component={Home} exact />
